@@ -1,0 +1,1250 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>T-shirt Shop</title>
+    <link rel="shortcut icon" type="image/x-icon" href="received_2588696401384460.jpeg"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- Estilos Css -->
+<style>
+:root{
+   --red:#ff2e63;
+   --black:#252a34;
+   --blue:#08d9d6;
+   --white:#eaeaea;
+   --title:35px;
+   --text:19px;
+}
+*{
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    background: #fff;
+    overflow-x: hidden;
+    font-family: 'Red Hat Text', sans-serif;
+}
+.go-top{
+    position: fixed;
+    bottom: 100px;
+    right: -100%;
+    width: 50px;
+    height: 50px;
+    background: #fff;
+    border:2px solid var(--red);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 1000;
+    transition: 0.5s;
+}
+.go-top:hover{
+    background: var(--red);
+    color:#fff;
+    border: 2px solid var(--white);
+}
+.go-top:hover span{color:var(--white);}
+
+.go-top > span{
+   font-size: 30px;
+   color: var(--black);
+}
+/** Skew **/
+.skew-abajo{
+    position: absolute;
+	bottom: 0;
+	left: 0;
+	border-width: 0 0 10vh 100vw;
+	border-style: solid;
+	border-color: transparent transparent #fff transparent;
+}
+.skew-arriba{
+    position: absolute;
+	top: 0;
+	left: 0;
+	border-width: 10vh 100vw 0 0;
+	border-style: solid;
+	border-color: #fff transparent transparent transparent;
+	z-index: 10;
+}
+
+
+#menu-btn{
+    display: none;
+}
+header .search-form{
+    position: absolute;
+    top: 115%; right: 7%;
+    background: #eba31e;
+    width: 26rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    transform: scaleY(0);
+    transform-origin: top;
+}
+header .search-form.active{
+transform: scaleY(1);
+}
+
+header .search-form input{
+    height: 100%;
+    width: 100%;
+    font-size: 1.6rem;
+    color: var(--black);
+    padding: 1rem;
+    text-transform: none;
+}
+header .search-form label{
+    cursor:pointer;
+    font-size: 2.2rem;
+    margin-right: 1.5rem;
+    color: var(--black);
+}
+
+header .search-form label:hover{
+    color: var(--main-color);
+}
+header .cart-items-container{
+    position: absolute;
+    top: 100%; right: -100%;
+    height: calc(100vh - 3.5rem);
+    width: 23rem;
+    background: #ffdac1;
+    padding:0 1.5rem;
+}
+
+header .cart-items-container.active{
+    right: 0;
+    }
+
+header .cart-items-container .cart-item{ 
+    position: relative;
+    margin: 2rem 0;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+header .cart-items-container .cart-item .fa-times{
+    position: absolute;
+    top: 1rem; right: 1rem;
+    font-size: 2rem;
+    cursor: pointer;
+    color: var(--black);
+}
+
+header .cart-items-container .cart-item .fa-times:hover{
+    color: var(--main-color);
+}
+
+header .cart-items-container .cart-item img{
+    height: 7rem;
+}
+header .cart-items-container .cart-item .content h3{
+    font-size: 2rem;
+    color: var(--black);
+    padding-bottom: .5rem;
+}
+header .cart-items-container .cart-item .content .price{
+    font-size: 1.5rem;
+    color: var(--black);
+}
+header .cart-items-container .btn{
+    width: 100%;
+    text-align: center;
+   background-color: #ec5114;
+}
+
+
+
+
+#menu-btn{
+    display: none;
+}
+
+
+/** Navegation Menu **/
+#header{
+    position: relative;
+    width: 100%;
+}
+.menu{
+    position: fixed;
+    top:0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background: #F90;;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 9999;
+}
+.menu .logo-box{margin-left: 20px;}
+.menu .logo-box h1 a{
+    text-decoration: none;
+    font-size: var(--title);
+    font-weight: 400;
+    color:#fff;
+}
+.menu .list-container{margin-right: 20px;}
+.menu .list-container ul{display: flex;}
+.menu .list-container ul li{list-style: none;}
+.menu .list-container ul li a{
+    text-decoration: none;
+    margin: 0px 10px;
+    padding:8px;
+    color: var(--black);
+    border-radius: 24px;
+    transition: 0.3s;
+    font-size: 16px;
+}
+.menu .list-container ul li a.active{
+    background: #F60;
+    color:#fff;
+}
+.menu .list-container ul li a:hover{
+    background: #F60;
+    color:#fff;
+}
+
+.btn-menu > .fa-bars{
+    display: none;
+}
+@media only screen and (max-width:1280px){
+    .btn-menu > .fa-bars{
+        display: block;
+        position:absolute;
+        right: 30px;
+        top: 20px;
+        font-size: 28px;
+        color: #000;
+        transition: 0.5s;
+        cursor: pointer;
+    }
+    .btn-menu > .fa-times{ color:#F60;}
+    .btn-menu > .fa-bars:hover{color:#fff;}
+    .menu .logo-box{margin-left: 30px;}
+    .menu .list-container{
+        position: fixed;
+        top:60px;
+        left:-100%;
+        background:#fff;
+        width: 100%;
+        height: calc(100vh - 60px);
+    }
+    .menu .list-container .lists{
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        border-top:4px solid var(--red);
+    }
+    .menu .list-container ul li{
+        width: 90%;
+        border-bottom: 2px solid #F60;
+        display: flex;
+        justify-content: center;
+    }
+    .menu .list-container ul li a{
+        font-size: 20px;
+        text-align: center;
+        padding:12px 0px;
+    }
+    .menu .list-container ul li a.active{
+        background: none;
+        color:#F60;
+    }
+    .menu .list-container ul li a:hover{
+        background: none;
+        color:#F60;
+    }
+}
+/** Navegation Menu **/
+
+/** IMG Header **/
+.img-header{
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background:url(https://www.ambitojuridico.com/sites/default/files/2022-11/Mundial-de-Futbol%28Shutterstock.com-kovop58%29.jpg);
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+
+}
+.img-header .welcome{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.img-header .welcome h1{
+    font-size: 50px;
+    color:#fff;
+    font-weight: 200;
+}
+.img-header .welcome hr{
+    width: 400px;
+    height: 2px;
+    background: #F60;
+    border: none;
+    margin-top: 5px;
+}
+.img-header .welcome p{
+    font-size: 20px;
+    color: #fff;
+    margin-top: 20px;
+}
+.img-header .welcome > button{
+    width: 170px;
+    height: 40px;
+    background: #F60;
+    border-radius: 24px;
+    border:none;
+    outline: none;
+    font-size: 22px;
+    color: #fff;
+    text-align: center;
+    margin-top: 20px;
+    cursor: pointer;
+    transition: 0.5s;
+}
+.img-header .welcome > button:hover{
+    background: #F90;
+}
+
+@media only screen and (max-width:773px ){
+    .img-header .welcome h1{font-size: 40px;}
+    .img-header .welcome > button{width: 130px; font-size: 20px;}
+}
+@media only screen and (max-width:590px){
+    .img-header .welcome h1{font-size: 30px;}
+    .img-header .welcome hr{width: 100px;}
+    .img-header .welcome p{font-size: 17px;}
+    .img-header .welcome > button{width: 100px; font-size: 17px;}
+}
+/** Testimonios **/
+
+
+
+
+
+
+.contenedor{
+    max-width: 1200px;
+    padding: 10px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    /* oculto lo que queda fuera del .contenedor */
+    contain: paint;
+}
+/* SECCION CONTENEDOR DE ITEMS */
+.contenedor .contenedor-items{
+    margin-top: 30px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    grid-gap:30px;
+    grid-row-gap: 30px;
+    /* width: 60%; */
+    width: 100%;
+    transition: .3s;
+}
+.contenedor .contenedor-items .item{
+    max-width: 200px;
+    margin: auto;
+    border: 1px solid #666;
+    border-radius: 10px;
+    padding: 20px;
+    transition: .3s;
+}
+.contenedor .contenedor-items .item .img-item{
+    width: 100%;
+}
+.contenedor .contenedor-items .item:hover{
+    box-shadow: 0 0 10px #666;
+    scale: 1.05;
+}
+.contenedor .contenedor-items .item .titulo-item{
+    display: block;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+}
+.contenedor .contenedor-items .item .precio-item{
+    display: block;
+    text-align: center;
+    font-weight: bold;
+    font-size: 22px;
+}
+
+.contenedor .contenedor-items .item .boton-item{
+    display: block;
+    margin: 10px auto;
+    border: none;
+    background-color: black;
+    color: #fff;
+    padding: 5px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+/* seccion carrito */
+.carrito{
+    border: 1px solid #666;
+    width: 30%;
+    margin-top: 30px;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: auto;
+    position: sticky !important;
+    top: 0;
+    transition: .3s;
+    /* Estilos para ocultar */
+    margin-right: -100%;
+    opacity: 0;
+}
+.carrito .header-carrito{
+    background-color: #000;
+    color: #ffd28f;
+    text-align: center;
+    padding: 30px 0;
+}
+.carrito .carrito-item{
+    display: flex;
+    align-items: center;
+    /* justify-content: space-between; */
+    position: relative;
+    border-bottom: 1px solid #666;
+    padding: 20px;
+}
+.carrito .carrito-item img{
+    margin-right: 20px;
+}
+.carrito .carrito-item .carrito-item-titulo{
+    display: block;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+.carrito .carrito-item .selector-cantidad{
+    display: inline-block;
+    margin-right: 25px;
+}
+.carrito .carrito-item .carrito-item-cantidad{
+    border: none;
+    font-size: 18px;
+    background-color: transparent;
+    display: inline-block;
+    width:30px;
+    padding: 5px;
+    text-align: center;
+}
+.carrito .carrito-item .selector-cantidad i{
+    font-size: 18px;
+    width: 32px;
+    height: 32px;
+    line-height: 32px;
+    text-align: center;
+    border-radius: 50%;
+    border: 1px solid #000;
+    cursor: pointer;
+}
+.carrito .carrito-item .carrito-item-precio{
+    font-weight: bold;
+    display: inline-block;
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+.carrito .carrito-item .btn-eliminar{
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    color: #000;
+    font-size: 20px;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    border-radius: 50%;
+    border: 1px solid #000;
+    cursor: pointer;
+    display: block;
+    background: transparent;
+    z-index: 20;
+}
+.carrito .carrito-item .btn-eliminar i{
+    pointer-events: none;
+}
+
+.carrito-total{
+    background-color: #f3f3f3;
+    padding: 30px;
+}
+.carrito-total .fila{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+.carrito-total .btn-pagar{
+    display: block;
+    width: 100%;
+    border: none;
+    background: #000;
+    color: #fff;
+    border-radius: 5px;
+    font-size: 18px;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    transition: .3s;
+}
+.carrito-total .btn-pagar:hover{
+    scale: 1.05;
+}
+
+
+
+
+@media only screen and (max-width:890px){
+    .testimonios .box-testimonio .card-testimonio .card-img img{width: 200px; height: 200px;}
+    .testimonios .box-testimonio .card-testimonio{width: 100%;}
+    .testimonios .box-testimonio .card-testimonio .testimonio-text h4{font-size: 25px;}
+}
+/** Footer **/
+.footer{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: url(../img/footer.jpg);
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+}
+.footer .deg-footer{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+}
+.footer .ejeZfooter{
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+.footer .footer-content{
+    padding-top: 100px;
+    width: 90%;
+    margin: auto;
+    padding-bottom: 100px;
+}
+.footer .footer-content .footer-title{
+    width: 70%;
+    margin: auto;
+    border:2px solid #fff;
+    padding:15px;
+}
+.footer .footer-content .footer-title h2{
+    font-size: 30px;
+    font-weight: 400;
+    color: #fff;
+    text-align: center;
+    margin-bottom: 5px;
+}
+.footer .footer-content .footer-title hr{
+    background: #fff;
+    height: 2px;
+    width: 80%;
+    margin:auto;
+}
+.footer .formulario-content{
+    width: 60%;
+    margin: 50px auto;
+    background: #fff;
+    padding:30px;
+    border-radius: 50px;
+    border: 1.5px solid #F60;
+}
+.footer .formulario-content #formulario{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+.footer .formulario-content #formulario label{
+    font-size: 20px;
+    text-align: center;
+    color: var(--black);
+    margin: 30px 0px 10px 0px;
+}
+.footer .formulario-content #formulario input{
+    width: 90%;
+    height: 40px;
+    margin:auto;
+    border-radius: 24px;
+    outline: none;
+    border:1.5px solid #F60;
+    text-align: center;
+    font-size: 18px;
+    color: var(--black);
+}
+.footer .formulario-content #formulario textarea{
+    width: 90%;
+    height: 200px;
+    margin:auto;
+    padding: 20px;
+    border-radius: 24px;
+    outline: none;
+    border:1.5px solid #F60;
+    font-size: 15px;
+    color: var(--black);
+}
+.footer .formulario-content #formulario .send{
+    margin: 30px;
+    display: flex;
+    justify-content: center;
+}
+.footer .formulario-content #formulario button{
+    width: 120px;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    font-size: 20px;
+    background: #F60;
+    border: none;
+    outline: none;
+    border-radius: 20px;
+    color: #fff;
+    cursor: pointer;
+    transition: 0.5s;
+}
+.footer .formulario-content #formulario button:hover{
+    background: #F90;
+}
+.footer .formulario-content #formulario .mensaje-form{
+    width: 100%;
+    margin:auto;
+    padding:20px;
+}
+.footer .formulario-content #formulario .mensaje-form p{
+    font-size:19px;
+    color: var(--black);
+    line-height: 35px;
+}
+.footer .footer-text{
+    position:absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+    background:rgba(0,0,0,0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top: 2px solid #fff;
+}
+.footer .footer-text p{
+    font-size: 20px;
+    text-align: center;
+    color: #fff;
+}
+.footer {
+  background: #333;
+  color: #fff;
+  padding: 10px;
+  text-align: center;
+}
+
+.footer .social [class^="icon-"] {
+  display: inline-block;
+  color: #333;
+  text-decoration: none;
+  font-size: 30px;
+  padding: 10px;
+  background: white;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  line-height: 40px;
+}
+
+
+@media only screen and (max-width:900px){
+    .footer .formulario-content{width: 85%; padding:20px;}
+    .footer .formulario-content #formulario input{width: 100%;}
+    .footer .formulario-content #formulario textarea{width: 100%;}
+}
+@media only screen and (max-width:590px){
+    .footer .formulario-content{width: 95%; padding:20px;}
+    .footer .formulario-content #formulario label{font-size: 17px;}
+    .footer .formulario-content #formulario input{width: 100%; font-size: 17px;}
+    .footer .formulario-content #formulario textarea{width: 100%;}
+    .footer .formulario-content #formulario .mensaje-form p{font-size: 17px;}
+    .footer .footer-text{width: 100%; padding: 0px 30px;}
+    .footer .footer-text p{font-size: 17px;}</style>
+
+    <link href="https://fonts.googleapis.com/css?family=Red+Hat+Text:400,500,700&display=swap" rel="stylesheet">
+
+</head>
+<body>
+
+  <!-- Ir Arriba -->
+  <div class="go-top">
+    <span class="fas fa-angle-up"></span>
+  </div>
+
+<!-- Menu de Navegacion -->
+    <header id="header">
+    <nav class="menu">
+     <div class="logo-box">
+       <h1><a href="#">T-shirt shop</a></h1>
+       <span class="btn-menu"><i class="fas fa-bars"></i></span>
+     </div>
+     
+     <div class="list-container">
+        <ul class="lists">
+            <li><a href="Index.html">Inicio</a></li>
+            <li><a href="Index.html" "#servicio" class="active">Ligas</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+            <div class="icons">
+</ul>
+        <div class="search-form">
+    <input type="search" id="search-box" placeholder="Buscar..."> 
+    <label for="search-box" class=""></label>
+</div>
+     </div>
+
+     <div class="cart-items-container">
+    <div class="cart-item">
+        <span class="fas fa-solid fa-check"></span>
+            <a href="#" class="btn"> Pagar Ahora ℳ</a>
+    </div>
+</div>
+    </nav>
+ 
+    <!-- Imagen Header -->
+    <div class="img-header">
+     <div class="welcome">
+       <h1>Las Camisetas de tu seleccion Favorita</h1>
+       <hr>
+       <p>Estan aqui</p>
+     </div>       
+    </div>
+    <div class="skew-abajo"></div>
+    </header>
+
+    <main>
+   <!-- Testimonios -->
+   <section class="testimonios">
+    <div class="testimonios-title">
+     <h2><center>Liga Premier</center></h2>  
+     <hr>
+    </div>
+    <main>
+    <section class="contenedor">
+    <div class="carrito" id="carrito">
+            <div class="header-carrito">
+                <h2>Tu Carrito</h2>
+            </div>
+            <div class="carrito-items">
+                <!-- <div class="carrito-item">
+                    <img src="img/boxengasse.png" width="80px" alt="">
+                    <div class="carrito-item-detalles">
+                        <span class="carrito-item-titulo">Box Engasse</span>
+                        <div class="selector-cantidad">
+                            <i class="fa-solid fa-minus"></i>
+                            <input type="text" value="1" class="carrito-item-cantidad" disabled>
+                            <i class="fa-solid fa-plus"></i>
+                        </div>
+                        <span class="carrito-item-precio">$15.000,00</span>
+                    </div>
+                   <span class="btn-eliminar">
+                    <i class="fa-duotone fa-trash"></i>
+                   </span>
+                </div>
+                <div class="carrito-item">
+                    <img src="img/skinglam.png" width="80px" alt="">
+                    <div class="carrito-item-detalles">
+                        <span class="carrito-item-titulo">Skin Glam</span>
+                        <div class="selector-cantidad">
+                            <i class="fa-solid fa-minus restar-cantidad"></i>
+                            <input type="text" value="3" class="carrito-item-cantidad" disabled>
+                            <i class="fa-solid fa-plus sumar-cantidad"></i>
+                        </div>
+                        <span class="carrito-item-precio">$18.000,00</span>
+                    </div>
+                   <button class="btn-eliminar">
+                        <i class="fa-solid fa-trash"></i>
+                   </button>
+                </div>
+                 -->
+            </div>
+            <div class="carrito-total">
+                <div class="fila">
+                    <strong>Tu Total</strong>
+                    <span class="carrito-precio-total">
+                        $120.000,00
+                    </span>
+                </div>
+                <button class="btn-pagar">Pagar <i class="fa-solid fa-bag-shopping"></i> </button>
+            </div>
+        </div>
+
+   <!-- Testimonios -->
+
+        <!-- Contenedor de elementos -->
+        <div class="contenedor-items">
+            <div class="item">
+                <span class="titulo-item">Argentina</span>
+                <img src=" https://m.media-amazon.com/images/I/61kS0cNVCLL.jpg " alt="" class="img-item">
+                <span class="precio-item">$450</span>
+                <button class="boton-item">Agregar al Carrito</button>
+            </div>            
+            <div class="item">
+                <span class="titulo-item">Mexico</span>
+                <img src=" https://www.aisope.com.mx/images/BZQW/WWCPH411.jpg " alt="" class="img-item">
+                <span class="precio-item">$450</span>
+                <button class="boton-item">Agregar al Carrito</button>
+            </div>  
+            <div class="item">
+                <span class="titulo-item">Brasil</span>
+                <img src=" https://shop.ticketmaster.com.mx/cdn/shop/products/Playera-Neymar-Jr-Selecci-n-Nacional-Brasil_1000x1000.jpg?v=1680107522 " alt="" class="img-item">
+                <span class="precio-item">$450</span>
+                <button class="boton-item">Agregar al Carrito</button>
+            </div>  
+            <div class="item">
+                <span class="titulo-item">Francia</span>
+                <img src=" https://idolos.mx/wp-content/uploads/2023/02/MBAPPE-PhotoRoom-min.jpg" alt="" class="img-item">
+                <span class="precio-item">$450</span>
+                <button class="boton-item">Agregar al Carrito</button>
+            </div>  
+            <div class="item">
+                <span class="titulo-item">Belgica</span>
+                <img src=" https://media.futbolmania.com/media/catalog/product/cache/1/image/0f330055bc18e2dda592b4a7c3a0ea22/H/D/HD9412-7_camiseta-color-rojo-adidas-belgica-de-bruyne-2022-2023_1_completa-trasera.jpg" alt="" class="img-item">
+                <span class="precio-item">$450</span>
+                <button class="boton-item">Agregar al Carrito</button>
+            </div>  
+            <div class="item">
+                <span class="titulo-item">Inglaterra</span>
+                <img src=" https://www.aisope.com.mx/images/BZQM/WCPH283.jpg " alt="" class="img-item">
+                <span class="precio-item">$450</span>
+                <button class="boton-item">Agregar al Carrito</button>
+            </div>  
+            <div class="item">
+                <span class="titulo-item">Portugal</span>
+                <img src="https://media.futbolmania.com/media/catalog/product/cache/1/image/0f330055bc18e2dda592b4a7c3a0ea22/D/N/DN0692-628-7_camiseta-color-rojo-nike-portugal-ronaldo-2022-2023-dri-fit-stadium_1_completa-trasera.jpg " alt="" class="img-item">
+                <span class="precio-item">$450</span>
+                <button class="boton-item">Agregar al Carrito</button>
+            </div>  
+            <div class="item">
+                <span class="titulo-item">España</span>
+                <img src="https://www.aisope.com.mx/images/BZQM/WCPH672.jpg" alt="" class="img-item">
+                <span class="precio-item">$450</span>
+                <button class="boton-item">Agregar al Carrito</button>
+            </div>  
+            <div class="item">
+                <span class="titulo-item">Croacia</span>
+                <img src="https://www.aisope.com.mx/images/BZQK/KWCPH180.jpg" alt="" class="img-item">
+                <span class="precio-item">$450</span>
+                <button class="boton-item">Agregar al Carrito</button>
+            </div>  
+            <div class="item">
+                <span class="titulo-item">Alemania</span>
+                <img src=" https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSiyEe_GeHlbFc5Vi2e1pkiniWSjO5iKtvf7AvqIx-f6A&s " alt="" class="img-item">
+                <span class="precio-item">$450</span>
+                <button class="boton-item">Agregar al Carrito</button>
+            </div>  
+            <div class="item">
+                <span class="titulo-item">Italia</span>
+                <img src="https://cf.camisetasfutbol.com.cn/upload/ttmall/img/20210617/cd1202b002b02993fee3c4c8e5bba82a.jpg=z-780,780_f-webp"  alt="" class="img-item">
+                <span class="precio-item">$450</span>
+                <button class="boton-item">Agregar al Carrito</button>
+            </div>  
+            <div class="item">
+                <span class="titulo-item">Japon</span>
+                <img src="https://tutiendashoka.com/wp-content/uploads/2022/09/camiseta-seleccion-de-japon-2022.jpg" alt="" class="img-item">
+                <span class="precio-item">$450</span>
+                <button class="boton-item">Agregar al Carrito</button>
+            </div>  
+            
+ 
+            
+
+
+
+        </section>
+ 
+ </main> 
+  <!-- Footer -->
+ <footer class="footer">
+   <div class="skew-arriba"></div>
+  <div class="deg-footer"></div>
+ 
+  <div class="ejeZfooter">
+  <div class="footer-content">
+   <div class="footer-title">
+     <h2>Formulario de Contacto</h2>
+     <hr>
+   </div>
+
+   <div class="formulario-content">
+     <form id="formulario">
+        <label for="user">Nombre:</label>
+        <input type="text" id="user" name="user" placeholder="Ingresa tu Nombre">
+   
+        <label for="email">Correo Electronico:</label>
+        <input type="email" id="email" name="email" placeholder="Ingresa tu Correo Electronico">
+   
+        <label for="message">Escribe tu mensaje</label>
+        <textarea name="menssage" id="message"></textarea>
+   
+        <div class="send"><button>Enviar</button></div>
+   
+        <div class="mensaje-form">
+          <p>Escribenos un mensaje, danos una sugerencia o un comentario que con mucho gusto leeremos:)</p>
+        </div>
+     </form>
+   </div>
+        <div class="social" id="contacto">
+                    <a href="https://www.facebook.com/Toluca-La-Bella-Services-102310285748963" target="_blank" class="icon-facebook"> <svg viewBox="0 0 24 24" width="32" height="32" stroke="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
+          <a href="https://twitter.com/ServicesToluca" target="_blank" class="icon-twitter"><svg viewBox="0 0 24 24" width="32" height="32" stroke="currentColor"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg></a>
+          <a href="https://www.instagram.com/Toluca_Labella_Services/s" target="_blank" class="icon-gplus"><svg viewBox="0 0 24 24" width="32" height="32" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
+        </div>
+   <div class="footer-text">
+     <p>&copy; T- Shirt Shop Services | Todos los derechos reservados.</p>
+   </div>
+  
+  </div>
+</div>
+ </footer>
+<!-- Scripts -->
+<script src="https://kit.fontawesome.com/35db202371.js"></script>
+<script>  
+
+var carritoVisible = false;
+
+//Espermos que todos los elementos de la pàgina cargen para ejecutar el script
+if(document.readyState == 'loading'){
+document.addEventListener('DOMContentLoaded', ready)
+}else{
+ready();
+}
+
+function ready(){
+
+//Agregremos funcionalidad a los botones eliminar del carrito
+var botonesEliminarItem = document.getElementsByClassName('btn-eliminar');
+for(var i=0;i<botonesEliminarItem.length; i++){
+    var button = botonesEliminarItem[i];
+    button.addEventListener('click',eliminarItemCarrito);
+}
+
+//Agrego funcionalidad al boton sumar cantidad
+var botonesSumarCantidad = document.getElementsByClassName('sumar-cantidad');
+for(var i=0;i<botonesSumarCantidad.length; i++){
+    var button = botonesSumarCantidad[i];
+    button.addEventListener('click',sumarCantidad);
+}
+
+ //Agrego funcionalidad al buton restar cantidad
+var botonesRestarCantidad = document.getElementsByClassName('restar-cantidad');
+for(var i=0;i<botonesRestarCantidad.length; i++){
+    var button = botonesRestarCantidad[i];
+    button.addEventListener('click',restarCantidad);
+}
+
+//Agregamos funcionalidad al boton Agregar al carrito
+var botonesAgregarAlCarrito = document.getElementsByClassName('boton-item');
+for(var i=0; i<botonesAgregarAlCarrito.length;i++){
+    var button = botonesAgregarAlCarrito[i];
+    button.addEventListener('click', agregarAlCarritoClicked);
+}
+
+//Agregamos funcionalidad al botón comprar
+document.getElementsByClassName('btn-pagar')[0].addEventListener('click',pagarClicked)
+}
+//Eliminamos todos los elementos del carrito y lo ocultamos
+function pagarClicked(){
+alert("Gracias por la compra");
+//Elimino todos los elmentos del carrito
+var carritoItems = document.getElementsByClassName('carrito-items')[0];
+while (carritoItems.hasChildNodes()){
+    carritoItems.removeChild(carritoItems.firstChild)
+}
+actualizarTotalCarrito();
+ocultarCarrito();
+}
+//Funciòn que controla el boton clickeado de agregar al carrito
+function agregarAlCarritoClicked(event){
+var button = event.target;
+var item = button.parentElement;
+var titulo = item.getElementsByClassName('titulo-item')[0].innerText;
+var precio = item.getElementsByClassName('precio-item')[0].innerText;
+var imagenSrc = item.getElementsByClassName('img-item')[0].src;
+console.log(imagenSrc);
+
+agregarItemAlCarrito(titulo, precio, imagenSrc);
+
+hacerVisibleCarrito();
+}
+
+//Funcion que hace visible el carrito
+function hacerVisibleCarrito(){
+carritoVisible = true;
+var carrito = document.getElementsByClassName('carrito')[0];
+carrito.style.marginRight = '0';
+carrito.style.opacity = '1';
+
+var items =document.getElementsByClassName('contenedor-items')[0];
+items.style.width = '60%';
+}
+
+//Funciòn que agrega un item al carrito
+function agregarItemAlCarrito(titulo, precio, imagenSrc){
+var item = document.createElement('div');
+item.classList.add = ('item');
+var itemsCarrito = document.getElementsByClassName('carrito-items')[0];
+
+//controlamos que el item que intenta ingresar no se encuentre en el carrito
+var nombresItemsCarrito = itemsCarrito.getElementsByClassName('carrito-item-titulo');
+for(var i=0;i < nombresItemsCarrito.length;i++){
+    if(nombresItemsCarrito[i].innerText==titulo){
+        alert("El item ya se encuentra en el carrito");
+        return;
+    }
+}
+
+var itemCarritoContenido = `
+    <div class="carrito-item">
+        <img src="${imagenSrc}" width="80px" alt="">
+        <div class="carrito-item-detalles">
+            <span class="carrito-item-titulo">${titulo}</span>
+            <div class="selector-cantidad">
+                <i class="fa-solid fa-minus restar-cantidad"></i>
+                <input type="text" value="1" class="carrito-item-cantidad" disabled>
+                <i class="fa-solid fa-plus sumar-cantidad"></i>
+            </div>
+            <span class="carrito-item-precio">${precio}</span>
+        </div>
+        <button class="btn-eliminar">
+            <i class="fa-solid fa-trash"></i>
+        </button>
+    </div>
+`
+item.innerHTML = itemCarritoContenido;
+itemsCarrito.append(item);
+
+//Agregamos la funcionalidad eliminar al nuevo item
+ item.getElementsByClassName('btn-eliminar')[0].addEventListener('click', eliminarItemCarrito);
+
+//Agregmos al funcionalidad restar cantidad del nuevo item
+var botonRestarCantidad = item.getElementsByClassName('restar-cantidad')[0];
+botonRestarCantidad.addEventListener('click',restarCantidad);
+
+//Agregamos la funcionalidad sumar cantidad del nuevo item
+var botonSumarCantidad = item.getElementsByClassName('sumar-cantidad')[0];
+botonSumarCantidad.addEventListener('click',sumarCantidad);
+
+//Actualizamos total
+actualizarTotalCarrito();
+}
+//Aumento en uno la cantidad del elemento seleccionado
+function sumarCantidad(event){
+var buttonClicked = event.target;
+var selector = buttonClicked.parentElement;
+console.log(selector.getElementsByClassName('carrito-item-cantidad')[0].value);
+var cantidadActual = selector.getElementsByClassName('carrito-item-cantidad')[0].value;
+cantidadActual++;
+selector.getElementsByClassName('carrito-item-cantidad')[0].value = cantidadActual;
+actualizarTotalCarrito();
+}
+//Resto en uno la cantidad del elemento seleccionado
+function restarCantidad(event){
+var buttonClicked = event.target;
+var selector = buttonClicked.parentElement;
+console.log(selector.getElementsByClassName('carrito-item-cantidad')[0].value);
+var cantidadActual = selector.getElementsByClassName('carrito-item-cantidad')[0].value;
+cantidadActual--;
+if(cantidadActual>=1){
+    selector.getElementsByClassName('carrito-item-cantidad')[0].value = cantidadActual;
+    actualizarTotalCarrito();
+}
+}
+
+//Elimino el item seleccionado del carrito
+function eliminarItemCarrito(event){
+var buttonClicked = event.target;
+buttonClicked.parentElement.parentElement.remove();
+//Actualizamos el total del carrito
+actualizarTotalCarrito();
+
+//la siguiente funciòn controla si hay elementos en el carrito
+//Si no hay elimino el carrito
+ocultarCarrito();
+}
+//Funciòn que controla si hay elementos en el carrito. Si no hay oculto el carrito.
+function ocultarCarrito(){
+var carritoItems = document.getElementsByClassName('carrito-items')[0];
+if(carritoItems.childElementCount==0){
+    var carrito = document.getElementsByClassName('carrito')[0];
+    carrito.style.marginRight = '-100%';
+    carrito.style.opacity = '0';
+    carritoVisible = false;
+
+    var items =document.getElementsByClassName('contenedor-items')[0];
+    items.style.width = '100%';
+}
+}
+//Actualizamos el total de Carrito
+function actualizarTotalCarrito(){
+//seleccionamos el contenedor carrito
+var carritoContenedor = document.getElementsByClassName('carrito')[0];
+var carritoItems = carritoContenedor.getElementsByClassName('carrito-item');
+var total = 0;
+//recorremos cada elemento del carrito para actualizar el total
+for(var i=0; i< carritoItems.length;i++){
+    var item = carritoItems[i];
+    var precioElemento = item.getElementsByClassName('carrito-item-precio')[0];
+    //quitamos el simobolo peso y el punto de milesimos.
+    var precio = parseFloat(precioElemento.innerText.replace('$','').replace('.',''));
+    var cantidadItem = item.getElementsByClassName('carrito-item-cantidad')[0];
+    console.log(precio);
+    var cantidad = cantidadItem.value;
+    total = total + (precio * cantidad);
+}
+total = Math.round(total * 100)/100;
+
+document.getElementsByClassName('carrito-precio-total')[0].innerText = '$'+total.toLocaleString("es") + ",00";
+
+}
+
+
+// Navegation Menu
+let btnMenu = document.querySelector('.btn-menu');
+let barIconX = document.querySelector('.btn-menu i');
+let menu = document.querySelector('.list-container');
+let menuContent = document.querySelector('.menu');
+var activador = true;
+
+btnMenu.addEventListener('click', (event) => {
+
+//Icon X
+barIconX.classList.toggle('fa-times');
+
+if(activador){
+ menu.style.left = '0%'; 
+ menu.style.transition = '0.5s';
+
+ activador = false;
+}
+else{
+activador = false;
+menu.style.left = '-100%';
+
+activador = true;
+}
+
+});
+
+// Add class "active"
+let enlaces = document.querySelectorAll('.lists li a');
+
+enlaces.forEach((element) => {
+
+element.addEventListener('click', (event) => {
+enlaces.forEach((link) => {
+ link.classList.remove('active');
+});
+event.target.classList.add('active');
+
+});
+
+});
+
+//Scroll Efect
+
+let prevScrollPos = window.pageYOffset;
+let goTop = document.querySelector('.go-top');
+
+window.onscroll = () => {
+
+//Hide & Show - Scroll Menu (Function)
+let currentScrollPos = window.pageYOffset;
+
+if (prevScrollPos > currentScrollPos) {
+menuContent.style.top = '0px';
+menuContent.style.transition = '0.5s';
+}else{
+menuContent.style.top = '-60px';
+menuContent.style.transition = '0.5s';
+}
+prevScrollPos = currentScrollPos;
+
+//Scoll Menu & Go Top & See Down (Styles)
+let arriba = window.pageYOffset;
+
+//Conditions
+if(arriba <= 600){
+menuContent.style.borderBottom = 'none';
+
+//Ocultar Go Top
+goTop.style.right = '-100px';
+}else{
+menuContent.style.borderBottom = '3px solid #ff2e63';
+
+//Mostrar Go Top
+goTop.style.right = '0px';
+}
+
+}
+
+//Go Top Click
+goTop.addEventListener('click', () => {
+document.body.scrollTop = 0;
+document.documentElement.scrollTop = 0;
+});
+
+let abajo = document.querySelector('#abajo');
+
+abajo.addEventListener('click', () => {
+document.body.scrollTop = 600;
+document.documentElement.scrollTop = 600;
+
+});
+
+let cartItem = document.querySelector('.cart-items-container');
+document.querySelector('#cart-btn').onclick = () =>{
+cartItem.classList.toggle('active');
+
+
+}
+
+
+
+
+
+</script>
+</body>
+</html>
